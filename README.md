@@ -50,7 +50,7 @@ This is where GraphQL comes in, GraphQL enable the client to get **_lagom_** ("_
 GraphQL is a communication pattern and not an implementation or API in itself. Developed by Facebook back in 2012, GraphQL is today a part of the GraphQL foundation.
 GraphQL enables the clients of a GraphQL service to get just the right amount of data.
 
-How does GraphQL solve the problems previusly described and always serves **_lagom_** amount of data to its clients?
+How does GraphQL solve the problems previously described and always serves **_lagom_** amount of data to its clients?
 It's actually rather simple, the client tells the backend exactly what it wants, and the backend will provide.
 
 But how does it actually work? First we need to describe our data, in a so called schema. Then from the schema we can construct queries. With a schema we can then query the GraphQL service.
