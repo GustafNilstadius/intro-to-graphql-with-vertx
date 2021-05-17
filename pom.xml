@@ -4,8 +4,16 @@
      xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
+  <developers>
+    <developer>
+      <name>Gustaf Nilstadius</name>
+      <organization>Redpill Linpro</organization>
+      <url>https://www.redpill-linpro.com/</url>
+    </developer>
+  </developers>
+
   <groupId>com.redpilllinpro</groupId>
-  <artifactId>graphqlbbldemo</artifactId>
+  <artifactId>graphqldemo</artifactId>
   <version>1.0.0-SNAPSHOT</version>
 
   <properties>
@@ -19,7 +27,7 @@
     <vertx.version>4.0.2</vertx.version>
     <junit-jupiter.version>5.7.0</junit-jupiter.version>
 
-    <main.verticle>com.redpilllinpro.graphqlbbldemo.MainVerticle</main.verticle>
+    <main.verticle>com.redpilllinpro.graphqldemo.MainVerticle</main.verticle>
     <launcher.class>io.vertx.core.Launcher</launcher.class>
   </properties>
 
@@ -42,23 +50,11 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-service-proxy</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
       <artifactId>vertx-web</artifactId>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-web-client</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-service-discovery</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-service-proxy</artifactId>
     </dependency>
 
     <dependency>
@@ -95,14 +91,6 @@
         <version>${maven-compiler-plugin.version}</version>
         <configuration>
           <release>11</release>
-        </configuration>
-      </plugin>
-      <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <annotationProcessors>
-            <annotationProcessor>io.vertx.codegen.CodeGenProcessor</annotationProcessor>
-          </annotationProcessors>
         </configuration>
       </plugin>
       <plugin>

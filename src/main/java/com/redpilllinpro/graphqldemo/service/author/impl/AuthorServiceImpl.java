@@ -1,7 +1,7 @@
-package com.redpilllinpro.graphqlbbldemo.service.author.impl;
+package com.redpilllinpro.graphqldemo.service.author.impl;
 
-import com.redpilllinpro.graphqlbbldemo.service.author.AuthorService;
-import com.redpilllinpro.graphqlbbldemo.service.author.model.Author;
+import com.redpilllinpro.graphqldemo.service.author.AuthorService;
+import com.redpilllinpro.graphqldemo.service.author.model.Author;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;

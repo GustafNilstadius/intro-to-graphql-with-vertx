@@ -1,4 +1,4 @@
-package com.redpilllinpro.graphqlbbldemo.service.book.model;
+package com.redpilllinpro.graphqldemo.service.book.model;
 
 import io.vertx.codegen.annotations.DataObject;
 import io.vertx.core.json.JsonObject;

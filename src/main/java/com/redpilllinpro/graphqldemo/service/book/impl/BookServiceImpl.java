@@ -1,7 +1,7 @@
-package com.redpilllinpro.graphqlbbldemo.service.book.impl;
+package com.redpilllinpro.graphqldemo.service.book.impl;
 
-import com.redpilllinpro.graphqlbbldemo.service.book.BookService;
-import com.redpilllinpro.graphqlbbldemo.service.book.model.Book;
+import com.redpilllinpro.graphqldemo.service.book.BookService;
+import com.redpilllinpro.graphqldemo.service.book.model.Book;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;

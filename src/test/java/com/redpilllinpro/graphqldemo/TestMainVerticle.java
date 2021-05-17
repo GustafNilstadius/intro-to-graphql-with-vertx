@@ -1,4 +1,4 @@
-package com.redpilllinpro.graphqlbbldemo;
+package com.redpilllinpro.graphqldemo;
 
 import io.vertx.core.Vertx;
 import io.vertx.junit5.VertxExtension;

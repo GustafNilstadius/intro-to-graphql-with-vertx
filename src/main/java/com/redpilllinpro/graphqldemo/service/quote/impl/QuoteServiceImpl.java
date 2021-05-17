@@ -1,7 +1,7 @@
-package com.redpilllinpro.graphqlbbldemo.service.quote.impl;
+package com.redpilllinpro.graphqldemo.service.quote.impl;
 
-import com.redpilllinpro.graphqlbbldemo.service.quote.QuoteService;
-import com.redpilllinpro.graphqlbbldemo.service.quote.model.Quote;
+import com.redpilllinpro.graphqldemo.service.quote.QuoteService;
+import com.redpilllinpro.graphqldemo.service.quote.model.Quote;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;

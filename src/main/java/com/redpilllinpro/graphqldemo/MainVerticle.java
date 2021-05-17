@@ -1,14 +1,11 @@
-package com.redpilllinpro.graphqlbbldemo;
+package com.redpilllinpro.graphqldemo;
 
-import com.redpilllinpro.graphqlbbldemo.service.author.AuthorService;
-import com.redpilllinpro.graphqlbbldemo.service.author.AuthorServiceVeritcle;
-import com.redpilllinpro.graphqlbbldemo.service.author.model.Author;
-import com.redpilllinpro.graphqlbbldemo.service.book.BookService;
-import com.redpilllinpro.graphqlbbldemo.service.book.BookServiceVerticle;
-import com.redpilllinpro.graphqlbbldemo.service.book.model.Book;
-import com.redpilllinpro.graphqlbbldemo.service.quote.QuoteService;
-import com.redpilllinpro.graphqlbbldemo.service.quote.QuoteServiceVerticle;
-import com.redpilllinpro.graphqlbbldemo.service.quote.model.Quote;
+import com.redpilllinpro.graphqldemo.service.author.AuthorService;
+import com.redpilllinpro.graphqldemo.service.author.model.Author;
+import com.redpilllinpro.graphqldemo.service.book.BookService;
+import com.redpilllinpro.graphqldemo.service.book.model.Book;
+import com.redpilllinpro.graphqldemo.service.quote.QuoteService;
+import com.redpilllinpro.graphqldemo.service.quote.model.Quote;
 import graphql.GraphQL;
 import graphql.schema.GraphQLSchema;
 import graphql.schema.idl.RuntimeWiring;
@@ -40,48 +37,27 @@ public class MainVerticle extends AbstractVerticle {
 
   @Override
   public void start(Promise<Void> startPromise) {
-    vertx.deployVerticle(BookServiceVerticle.class.getName(),
-      new DeploymentOptions().setInstances(3).setConfig(config()), event -> System.out.println("Deployment of BookService succeeded? " + event.succeeded()));
-    vertx.deployVerticle(QuoteServiceVerticle.class.getName(),
-      new DeploymentOptions().setInstances(3).setConfig(config()), event -> System.out.println("Deployment of QuoteService succeeded? " + event.succeeded()));
-    vertx.deployVerticle(AuthorServiceVeritcle.class.getName(),
-      new DeploymentOptions().setInstances(3).setConfig(config()), event -> System.out.println("Deployment of AuthorService succeeded? " + event.succeeded()));
-
-    // Create proxies for the services.
-    bookService = BookService.createProxy(vertx);
-    authorService = AuthorService.createProxy(vertx);
-    quoteService = QuoteService.createProxy(vertx);
-
-    Router router = Router.router(vertx);
-
+    bookService = BookService.create(vertx);
+    authorService = AuthorService.create(vertx);
+    quoteService = QuoteService.create(vertx);
 
     GraphQLHandlerOptions graphQLHandlerOptions = new GraphQLHandlerOptions()
       .setRequestBatchingEnabled(true);
 
     GraphQL graphQL = setupGraphQL();
-    GraphQLHandler graphQLHandler = null;
-    try {
-      graphQLHandler = GraphQLHandler.create(graphQL, graphQLHandlerOptions);
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+    GraphQLHandler graphQLHandler = GraphQLHandler.create(graphQL, graphQLHandlerOptions);
+
 
     // Graphical interface, GraphiQL.
     GraphiQLHandlerOptions options = new GraphiQLHandlerOptions()
       .setEnabled(true);
 
-
+    Router router = Router.router(vertx);
     router.route().handler(LoggerHandler.create());
     router.post().handler(BodyHandler.create());
 
     router.route("/graphql").handler(graphQLHandler);
     router.route("/graphiql/*").handler(GraphiQLHandler.create(options));
-
-
-    router.errorHandler(500, ctx -> {
-      ctx.failure().printStackTrace();
-      ctx.response().setStatusCode(500).end();
-    });
 
     vertx.createHttpServer().requestHandler(router).listen(8888, http -> {
       if (http.succeeded()) {

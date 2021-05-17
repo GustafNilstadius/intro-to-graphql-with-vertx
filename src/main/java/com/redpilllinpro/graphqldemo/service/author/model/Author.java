@@ -1,7 +1,6 @@
-package com.redpilllinpro.graphqlbbldemo.service.author.model;
+package com.redpilllinpro.graphqldemo.service.author.model;
 
 import io.vertx.codegen.annotations.DataObject;
-import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
 @DataObject
