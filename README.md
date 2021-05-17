@@ -1,28 +1,33 @@
-GraphQL is a modern approach to APIs that simplifies integrations. This is an introduction to what GraphQL is, and we build a simple GraphQL service with hte help of Vert.X.
+[This article about GraphQL can be read here. https://www.redpill-linpro.com/techblog/2021/05/17/intro-to-graphql-with-vertx.html](https://www.redpill-linpro.com/techblog/2021/05/17/intro-to-graphql-with-vertx.html)
+
+GraphQL is a modern approach to APIs that simplifies integrations. This is an introduction to what GraphQL is, and we build a simple GraphQL service with the help of Vert.X.
 
 ## What you'll need to follow along ##
-This is introduction will barely scratch the surface of the potential and power that GraphQL together with Vert.X offers. A basic understanding of programming is assumed.
+This introduction will barely scratch the surface of the potential and power that GraphQL together with Vert.X offers. Understanding of programming is assumed.
 * JDK 8+
 * Maven
 * IDE
+* Familiarity with REST and HTTP
+
+Source code for this post can be found here: [https://github.com/HiPERnx/intro-to-graphql-with-vertx](https://github.com/HiPERnx/intro-to-graphql-with-vertx).
 
 ## Background ##
 Imagine this, you have a book store with 3 defined data entities; Book, Author and Quote. Where every book has an author and every author has a favorite quote.
-If we want to retrieve data from our book store with traditional REST in our newly developed SuperMegaAwesomeBookStore<sup>TM</sup> app we have two options.
+If we want to retrieve data from our book store with a traditional REST call in our newly developed SuperMegaAwesomeBookStore<sup>TM</sup> app we have two options.
 
-**Option 1**
+**Option 1:**
 Separate REST GET requests for each entity.
 1.  We can make a call to `/books` to get a list of all the books.
 2.  A call to `/authors/:authorID` to get the author.
 3.  Lastly a call `/quotes/:quoteID` to get the favorite quote of the author.
 
-**Option 2**
+**Option 2:**
 Returning a deep object for one REST GET request.
 1.  We can make a call to `/books` to get a list of all the books complete with all the authors and quotes.
 
 
 **The data**
-Either way we end up with the same data exampled bellow.
+Independent of the method (option 1 or 2) we end up with the same data exampled bellow.
 ```json
 [
     {
@@ -126,7 +131,7 @@ type Quote {
 The obligatory `Query` object defines two queries, these queries will later be exposed to our clients.
 
 **bookById(id: ID): Book**
-As the name suggests, it's a query to find a book by id. It takes a argument of scalar `ID`, and it returns an object of type `Book`.
+As the name suggests, it's a query to find a book by id. It takes an argument of scalar `ID`, and it returns an object of type `Book`.
 
 **getBooks: [Book]**
 Returns an array of type `Book`.
