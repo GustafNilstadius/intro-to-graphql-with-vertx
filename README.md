@@ -1,11 +1,3 @@
----
-layout: post
-title: Introduction to GraphQL with Vert.X
-description: A introduction to what GraphQL is with practical examples written in Java with the help of the Vert.X framework. How to get lagom amount of data for your clients.
-author: gustaf
-tags: [GraphQL, Vert.X, Java, REST]
----
-
 GraphQL is a modern approach to APIs that simplifies integrations. This is an introduction to what GraphQL is, and we build a simple GraphQL service with hte help of Vert.X.
 
 ## What you'll need to follow along ##
