@@ -16,9 +16,9 @@ public class AuthorServiceImpl implements AuthorService {
 
   public AuthorServiceImpl(Vertx vertx) {
     authorData = new HashMap<>();
-    authorData.put("author-1", new Author("author-1", "Joanne", "Rowling", "quote-1"));
-    authorData.put("author-2", new Author("author-2", "Herman", "Melville", "quote-2"));
-    authorData.put("author-3", new Author("author-3", "William", "Gibson", "quote-3"));
+    authorData.put("author-0", new Author("author-0", "Joanne", "Rowling", "quote-1"));
+    authorData.put("author-1", new Author("author-1", "Herman", "Melville", "quote-2"));
+    authorData.put("author-2", new Author("author-2", "William", "Gibson", "quote-3"));
   }
 
   @Override
@@ -27,4 +27,15 @@ public class AuthorServiceImpl implements AuthorService {
     resultHandler.handle(Future.succeededFuture(authorData.get(id)));
     return this;
   }
+
+  @Override
+  public AuthorService addAuthor(Author author, Handler<AsyncResult<Author>> resultHandler) {
+    String id = String.format("author-%d", authorData.size());
+    author.setId(id);
+    authorData.put(author.getId(), author);
+    resultHandler.handle(Future.succeededFuture(authorData.get(author.getId())));
+    return this;
+  }
+
+
 }

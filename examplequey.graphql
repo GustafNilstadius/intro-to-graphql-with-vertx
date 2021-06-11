@@ -1,0 +1,21 @@
+mutation addBook($book: BookInput!) {
+  addBook(book: $book) {
+    id
+    name
+    author {
+      firstName
+    }
+  }
+}
+mutation addAuthor($author: AuthorInput!) {
+  addAuthor(author: $author) {
+    id
+    firstName
+  }
+}
+query getBooks {
+  getBooks {
+    name
+    pageCount
+  }
+}

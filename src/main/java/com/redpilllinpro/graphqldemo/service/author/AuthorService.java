@@ -15,5 +15,6 @@ public interface AuthorService {
 
   public AuthorService getAuthorByID(String id, Handler<AsyncResult<Author>> resultHandler);
 
+  AuthorService addAuthor(Author author, Handler<AsyncResult<Author>> resultHandler);
 
 }

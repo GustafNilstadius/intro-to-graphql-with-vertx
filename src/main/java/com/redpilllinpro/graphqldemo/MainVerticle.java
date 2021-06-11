@@ -15,6 +15,7 @@ import graphql.schema.idl.TypeDefinitionRegistry;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Promise;
+import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.BodyHandler;
 import io.vertx.ext.web.handler.LoggerHandler;
@@ -24,7 +25,9 @@ import io.vertx.ext.web.handler.graphql.GraphiQLHandler;
 import io.vertx.ext.web.handler.graphql.GraphiQLHandlerOptions;
 import io.vertx.ext.web.handler.graphql.schema.VertxDataFetcher;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import static graphql.schema.idl.RuntimeWiring.newRuntimeWiring;
 import static graphql.schema.idl.TypeRuntimeWiring.newTypeWiring;
@@ -83,12 +86,44 @@ public class MainVerticle extends AbstractVerticle {
         .dataFetcher("author", authorDataFetcher()))
       .type(newTypeWiring("Author")
         .dataFetcher("favoriteQuote", quoteDataFetcher()))
+      .type(newTypeWiring("Mutation")
+        .dataFetcher("addBook", addBook())
+        .dataFetcher("addAuthor", addAuthor()))
       .build();
 
     SchemaGenerator schemaGenerator = new SchemaGenerator();
     GraphQLSchema graphQLSchema = schemaGenerator.makeExecutableSchema(typeDefinitionRegistry, runtimeWiring);
 
     return GraphQL.newGraphQL(graphQLSchema).build();
+  }
+
+  // Mutation handlers
+  private VertxDataFetcher<Book> addBook() {
+    return VertxDataFetcher.create((dataFetchingEnvironment, booksPromise) -> {
+      try {
+        LinkedHashMap<String, Object> bookArg = dataFetchingEnvironment.<LinkedHashMap<String, Object>>getArgument("book");
+        Book book = new Book(new JsonObject(bookArg));
+        System.out.println(book.toJson().encodePrettily());
+        bookService.addBook(book, booksPromise);
+      } catch (Exception e) {
+        e.printStackTrace();
+        booksPromise.fail(e);
+      }
+    });
+  }
+
+  private VertxDataFetcher<Author> addAuthor() {
+    return VertxDataFetcher.create((dataFetchingEnvironment, authorPromise) -> {
+      try {
+        LinkedHashMap<String, Object> authorArg = dataFetchingEnvironment.<LinkedHashMap<String, Object>>getArgument("author");
+        Author author = new Author(new JsonObject(authorArg));
+        System.out.println(author.toJson().encodePrettily());
+        authorService.addAuthor(author, authorPromise);
+      } catch (Exception e) {
+        e.printStackTrace();
+        authorPromise.fail(e);
+      }
+    });
   }
 
   // Data fetchers

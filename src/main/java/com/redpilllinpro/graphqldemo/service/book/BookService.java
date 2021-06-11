@@ -19,5 +19,7 @@ public interface BookService {
 
   BookService getBooks(Handler<AsyncResult<List<Book>>> resultHandler);
 
+  BookService addBook(Book book, Handler<AsyncResult<Book>> resultHandler);
+
 
 }

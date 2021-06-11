@@ -18,7 +18,7 @@ public class Book {
   }
 
   public Book(JsonObject jsonObject) {
-    this.id = jsonObject.getString("id");
+    this.id = jsonObject.getString("id", null);
     this.name = jsonObject.getString("name");
     this.pageCount = jsonObject.getInteger("pageCount");
     this.author = jsonObject.getString("author");

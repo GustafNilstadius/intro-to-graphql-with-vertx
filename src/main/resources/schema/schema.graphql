@@ -21,3 +21,20 @@ type Quote {
   id: ID
   value: String
 }
+
+type Mutation {
+  addBook(book: BookInput): Book
+  addAuthor(author: AuthorInput): Author
+}
+
+input BookInput {
+  name: String!
+  pageCount: Int!
+  author: String
+}
+
+input AuthorInput {
+  firstName: String!
+  lastName: String!
+}
+
